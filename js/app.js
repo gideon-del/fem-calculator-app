@@ -7,6 +7,7 @@ const screen = document.querySelector("[data-screen]");
 const calcBg = document.querySelector("[data-calc]");
 const del = document.querySelector(".del");
 const reset = document.querySelector(".reset");
+const equal = document.querySelector("[data-equal]");
 themes.forEach((theme) => {
   theme.addEventListener("click", function (e) {
     if (e.target.classList.contains("active")) return;
@@ -20,6 +21,7 @@ themes.forEach((theme) => {
     calcBg.dataset.calc = `${themeNum}`;
     del.dataset.del = `${themeNum}`;
     reset.dataset.del = `${themeNum}`;
+    equal.dataset.equal = `${themeNum}`;
   });
 });
 console.log(del, reset);
