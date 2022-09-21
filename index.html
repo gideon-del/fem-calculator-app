@@ -17,12 +17,14 @@
   <body class="font-leagueSpartan">
     <!-- Container -->
     <main
-      class="min-h-screen flex flex-col items-center justify-center bg-veryDarkDesaturatedBlueMain"
+      class="min-h-screen flex flex-col items-center justify-center main"
+      data-main="1"
     >
       <div class="max-w-md flex flex-col justify-center items-center">
         <!-- Logo and Toggle -->
         <section
-          class="flex justify-between text-white w-[90%] items-end mb-11"
+          class="flex justify-between w-[90%] items-end mb-11"
+          data-text="1"
         >
           <h1 class="text-3xl">calc</h1>
           <div class="flex items-end space-x-6">
@@ -35,17 +37,18 @@
                 <p>3</p>
               </div>
               <!-- Button -->
-              <div
-                class="bg-veryDarkDesaturatedBlueToggle rounded-3xl px-1 py-1 flex space-x-2"
-              >
+              <div class="rounded-3xl px-1 py-1 flex space-x-2" data-toggle="1">
                 <div
                   class="bg-redToggle rounded-full w-4 h-4 opacity-0 toggle active"
+                  data-value="1"
                 ></div>
                 <div
-                  class="bg-redToggle rounded-full w-4 h-4 opacity-0 toggle"
+                  class="bg-orange rounded-full w-4 h-4 opacity-0 toggle"
+                  data-value="2"
                 ></div>
                 <div
-                  class="bg-redToggle rounded-full w-4 h-4 opacity-0 toggle"
+                  class="bg-pureCyan rounded-full w-4 h-4 opacity-0 toggle"
+                  data-value="3"
                 ></div>
               </div>
             </div>
@@ -53,33 +56,35 @@
         </section>
         <!-- Screen -->
         <section
-          class="bg-veryDarkDesaturatedBlueScreen w-[90%] h-20 rounded-lg flex justify-end pr-2 items-center text-white text-default"
+          class="w-[90%] h-20 rounded-lg flex justify-end pr-2 items-center text-default"
+          data-screen="1"
         >
           <span>399,981</span>
         </section>
         <!-- Calculator key -->
         <section
-          class="bg-veryDarkDesaturatedBlueToggle my-5 p-4 rounded-lg grid grid-cols-4 grid-rows-5 gap-3 w-[90%] text-center"
+          class="my-5 p-4 rounded-lg grid grid-cols-4 grid-rows-5 gap-3 w-[90%] text-center"
+          data-calc="1"
         >
           <!-- Key -->
-          <button data-key="1">7</button>
-          <button data-key="1">8</button>
-          <button data-key="1">9</button>
-          <button data-del="1">DEL</button>
-          <button data-key="1">4</button>
-          <button data-key="1">5</button>
-          <button data-key="1">6</button>
-          <button data-key="1">+</button>
-          <button data-key="1">1</button>
-          <button data-key="1">2</button>
-          <button data-key="1">3</button>
-          <button data-key="1">-</button>
-          <button data-key="1">.</button>
-          <button data-key="1">0</button>
-          <button data-key="1">x</button>
-          <button data-key="1">/</button>
-          <button class="col-span-2" data-del="1">RESET</button>
-          <button class="" data-equal="1">=</button>
+          <button class="key" data-key="1">7</button>
+          <button class="key" data-key="1">8</button>
+          <button class="key" data-key="1">9</button>
+          <button class="key del" data-del="1">DEL</button>
+          <button class="key" data-key="1">4</button>
+          <button class="key" data-key="1">5</button>
+          <button class="key" data-key="1">6</button>
+          <button class="key" data-key="1">+</button>
+          <button class="key" data-key="1">1</button>
+          <button class="key" data-key="1">3</button>
+          <button class="key" data-key="1">3</button>
+          <button class="key" data-key="1">-</button>
+          <button class="key" data-key="1">.</button>
+          <button class="key" data-key="1">0</button>
+          <button class="key" data-key="1">x</button>
+          <button class="key" data-key="1">/</button>
+          <button class="col-span-2 key reset" data-del="1">RESET</button>
+          <button class="key" data-equal="1">=</button>
         </section>
       </div>
     </main>
