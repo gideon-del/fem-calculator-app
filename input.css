@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "League Spartan";
+  src: url(../League_Spartan/static/LeagueSpartan-Bold.ttf);
+}
+
+.active {
+  @apply opacity-100;
+}
+[data-key="1"] {
+  @apply bg-lightGrayishOrange pt-2 px-4 text-veryDarkGrayishBlue text-default rounded-lg border-b-4 border-b-grayishOrange active:translate-y-1 active:bg-grayishOrange transition-all;
+}
+[data-key="2"] {
+}
+[data-del="1"] {
+  @apply bg-desaturatedDarkBlueBackground pt-2 px-4 text-white text-default rounded-lg border-b-4 border-b-desaturatedDarkBlueShadow active:translate-y-1 active:bg-desaturatedDarkBlueShadow transition-all duration-200 flex justify-center;
+}
+[data-equal="1"] {
+  @apply bg-redToggle pt-2 px-4 text-white text-default rounded-lg border-b-4 border-b-darkRed active:translate-y-1 active:bg-darkRed transition-all duration-200 col-span-2;
+}
