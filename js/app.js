@@ -9,22 +9,38 @@ const del = document.querySelector(".del");
 const reset = document.querySelector(".reset");
 const equal = document.querySelector("[data-equal]");
 let screenVal = screen.dataset.value;
+let curTheme = localStorage.getItem("theme") ?? 1;
+
 const number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const operator = ["-", "+", "/", "*"];
+const addtheme = (theme = 1) => {
+  const currentTheme = document.querySelector(".active");
+  const newTheme = document.querySelector(`[data-value="${theme}"]`);
+  if (currentTheme !== newTheme) {
+    currentTheme.classList.remove("active");
+    newTheme.classList.add("active");
+  }
+  keys.forEach((key) => (key.dataset.key = `${theme}`));
+  main.dataset.main = `${theme}`;
+  text.dataset.text = `${theme}`;
+  screen.dataset.screen = `${theme}`;
+  calcBg.dataset.calc = `${theme}`;
+  del.dataset.del = `${theme}`;
+  reset.dataset.del = `${theme}`;
+  equal.dataset.equal = `${theme}`;
+};
+window.addEventListener("load", function () {
+  addtheme(curTheme);
+});
 themes.forEach((theme) => {
   theme.addEventListener("click", function (e) {
-    if (e.target.classList.contains("active")) return;
-    document.querySelector(".active").classList.remove("active");
-    e.target.classList.add("active");
-    const themeNum = +e.target.dataset.value;
-    keys.forEach((key) => (key.dataset.key = `${themeNum}`));
-    main.dataset.main = `${themeNum}`;
-    text.dataset.text = `${themeNum}`;
-    screen.dataset.screen = `${themeNum}`;
-    calcBg.dataset.calc = `${themeNum}`;
-    del.dataset.del = `${themeNum}`;
-    reset.dataset.del = `${themeNum}`;
-    equal.dataset.equal = `${themeNum}`;
+    // if (e.target.classList.contains("active")) return;
+    // document.querySelector(".active").classList.remove("active");
+    // e.target.classList.add("active");
+    // const themeNum = +e.target.dataset.value;
+    localStorage.setItem("theme", `${+e.target.dataset.value}`);
+    curTheme = localStorage.getItem("theme");
+    addtheme(curTheme);
   });
 });
 console.log(del, reset);
