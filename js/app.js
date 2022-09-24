@@ -1,4 +1,5 @@
 "use strict";
+// Ellements
 const themes = document.querySelectorAll(".toggle");
 const keys = document.querySelectorAll("[data-key]");
 const main = document.querySelector("[data-main]");
@@ -11,8 +12,9 @@ const equal = document.querySelector("[data-equal]");
 let screenVal = screen.dataset.value;
 let curTheme = localStorage.getItem("theme") ?? 1;
 
-const number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const operator = ["-", "+", "/", "*"];
+const number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+const operator = ["-", "+", "/", "*", "."];
+// Functions
 const addtheme = (theme = 1) => {
   const currentTheme = document.querySelector(".active");
   const newTheme = document.querySelector(`[data-value="${theme}"]`);
@@ -29,49 +31,34 @@ const addtheme = (theme = 1) => {
   reset.dataset.del = `${theme}`;
   equal.dataset.equal = `${theme}`;
 };
-window.addEventListener("load", function () {
-  addtheme(curTheme);
-});
-themes.forEach((theme) => {
-  theme.addEventListener("click", function (e) {
-    // if (e.target.classList.contains("active")) return;
-    // document.querySelector(".active").classList.remove("active");
-    // e.target.classList.add("active");
-    // const themeNum = +e.target.dataset.value;
-    localStorage.setItem("theme", `${+e.target.dataset.value}`);
-    curTheme = localStorage.getItem("theme");
-    addtheme(curTheme);
-  });
-});
-console.log(del, reset);
-keys.forEach((key) => {
-  key.addEventListener("click", function (e) {
-    let num = e.target.dataset.value;
 
-    if (!num) return;
-    if (+num) {
-      if (screenVal != "0" || !screenVal) {
-        screenVal = `${screenVal}${num}`;
-      } else {
-        screenVal = num;
-      }
-    }
-    if (operator.includes(num) && screenVal != "0" && screenVal) {
-      let lastchild = screenVal.charAt(screenVal.length - 1);
-      if (operator.includes(lastchild)) return;
-      screenVal = `${screenVal}${num}`;
-    }
-    screen.querySelector("span").textContent = screenVal;
-  });
-});
-del.addEventListener("click", function () {
+console.log(del, reset);
+const addToScreen = (val) => {
+  let num = val;
+
+  // if (!num) return;
+  if (+num || num == "0") {
+    console.log(num);
+    screenVal = `${screenVal}${num}`;
+  }
+  if (operator.includes(num) && screenVal.length > 0 && screenVal) {
+    let lastchild = screenVal.charAt(screenVal.length - 1);
+    if (operator.includes(lastchild)) return;
+    screenVal = `${screenVal}${num}`;
+  }
+  screen.querySelector("span").textContent = screenVal;
+};
+const deleteVal = () => {
   screenVal = screenVal.substring(0, screenVal.length - 1);
   screen.querySelector("span").textContent = screenVal;
-});
-// const test = "200+";
-// console.log(test.charAt(test.length - 1));
-equal.addEventListener("click", function () {
-  if (screenVal == "0" || !screenVal) return;
+};
+
+const resetVal = () => {
+  screenVal = "";
+  screen.querySelector("span").textContent = screenVal;
+};
+const clac = () => {
+  if (!screenVal) return;
   let lastchild = screenVal.charAt(screenVal.length - 1);
   let sign = "";
   if (operator.includes(lastchild)) {
@@ -81,8 +68,35 @@ equal.addEventListener("click", function () {
   screenVal = eval(screenVal);
   screenVal = `${screenVal}${sign}`;
   screen.querySelector("span").textContent = screenVal;
+};
+// Events
+window.addEventListener("load", function () {
+  addtheme(curTheme);
 });
-reset.addEventListener("click", function () {
-  screenVal = "0";
-  screen.querySelector("span").textContent = screenVal;
+themes.forEach((theme) => {
+  theme.addEventListener("click", function (e) {
+    localStorage.setItem("theme", `${+e.target.dataset.value}`);
+    curTheme = localStorage.getItem("theme");
+    addtheme(curTheme);
+  });
+});
+keys.forEach((key) => {
+  key.addEventListener("click", function (e) {
+    addToScreen(e.target.dataset.value);
+  });
+});
+del.addEventListener("click", deleteVal);
+
+equal.addEventListener("click", clac);
+reset.addEventListener("click", resetVal);
+window.addEventListener("keydown", function (e) {
+  if (operator.includes(e.key) || number.includes(e.key)) {
+    addToScreen(e.key);
+  }
+  if (e.key === "Backspace") {
+    deleteVal();
+  }
+  if (e.key == "=" || e.key == "Enter") {
+    clac();
+  }
 });
